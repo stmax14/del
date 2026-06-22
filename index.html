@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tizim Boshqaruvi</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        h2 {
+            color: #38bdf8;
+            margin-bottom: 5px;
+            font-size: 22px;
+            text-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+        }
+        .status-bar {
+            font-size: 13px;
+            color: #94a3b8;
+            margin-bottom: 25px;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            width: 100%;
+            max-width: 400px;
+        }
+        .btn {
+            background-color: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 20px 10px;
+            color: #f8fafc;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.2s ease;
+        }
+        .btn:active {
+            transform: scale(0.95);
+            background-color: #334155;
+        }
+        .btn-danger {
+            grid-column: span 2;
+            background: linear-gradient(135deg, #ef4444, #991b1b);
+            border: none;
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+        }
+        .btn-danger:active {
+            background: linear-gradient(135deg, #dc2626, #7f1d1d);
+        }
+        .icon {
+            font-size: 26px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Tizim Pulti</h2>
+    <div class="status-bar">Kompyuter masofaviy nazorati</div>
+
+    <div class="grid-container">
+        <button class="btn" onclick="sendCmd('catalog')">
+            <span class="icon">📁</span>
+            <span>Papkalar Ro'yxati</span>
+        </button>
+        
+        <button class="btn" onclick="sendCmd('screenshot')">
+            <span class="icon">📸</span>
+            <span>Skrinshot Olish</span>
+        </button>
+        
+        <button class="btn" onclick="sendCmd('camera')">
+            <span class="icon">📷</span>
+            <span>Kamera Rasmi</span>
+        </button>
+        
+        <button class="btn" onclick="sendCmd('clean_all')">
+            <span class="icon">🚨</span>
+            <span>Papkalarni Tozalash</span>
+        </button>
+        
+        <button class="btn btn-danger" onclick="sendCmd('shutdown')">
+            <span class="icon">💻</span>
+            <span>Kompyuterni O'chirish</span>
+        </button>
+    </div>
+
+    <script>
+        // Telegram WebApp obyektini initsializatsiya qilish
+        let tg = window.Telegram.WebApp;
+        tg.expand(); // Oynani srazu kattalashtirish
+        tg.ready();
+
+        function sendCmd(cmd) {
+            // Tanlangan buyruqni botga matn ko'rinishida yuborish
+            tg.sendData(cmd);
+            tg.close(); // Buyruq ketgach mini app yopiladi
+        }
+    </script>
+</body>
+</html>
